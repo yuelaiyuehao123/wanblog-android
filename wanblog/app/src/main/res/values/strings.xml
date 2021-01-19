@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">WanBlog</string>
+
+    <string name="main_tab_home">首页</string>
+    <string name="main_tab_category">分类</string>
+    <string name="main_tab_cart">购物车</string>
+    <string name="main_tab_me">我的</string>
+
+    <string name="me_billing_details">账单明细</string>
+    <string name="me_about_lexiaoian">获取联系人信息</string>
+    <string name="me_settings">设置</string>
+    <string name="forget_password">忘记密码?</string>
+
+</resources>

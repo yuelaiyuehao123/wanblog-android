@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#40A1F7</color>
+    <color name="colorPrimaryDark">#40A1F7</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGreen">#ff669900</color>
+    <color name="colorGray">#ccc</color>
+    <color name="transparent">#00000000</color>
+    <color name="global_red_color">#FF3A5F</color>
+    <color name="global_bg_white">#ffffff</color>
+    <color name="global_bg_gray">#f4f4f4</color>
+    <color name="global_line_color">#eeeeee</color>
+
+    <color name="dialog_bg_color">#00FFFFFF</color>
+
+    <color name="me_bg_color">#F4F4F4</color>
+    <color name="me_bg_line_color">#eeeeee</color>
+    <color name="me_text_color">#333333</color>
+    <color name="edit_text_baseline_color">#E0E0E0</color>
+    <color name="edit_text_hint_color">#969696</color>
+    <color name="forget_pwd_color">#40A1F7</color>
+    <color name="argument_color">#888888</color>
+
+    <color name="item_border_color">#666666</color>
+    <color name="item_default_color">#22EEEEEE</color>
+    <color name="item_pressed_color">#CCCCCC</color>
+    <color name="item_activated_color">#77CEEE</color>
+
+    <color name="global_txt_black1">#000000</color>
+    <color name="global_txt_black2">#555555</color>
+    <color name="global_txt_black3">#888888</color>
+    <color name="global_txt_black4">#333333</color>
+    <color name="global_txt_black5">#666666</color>
+
+
+    <color name="main_bottom_tab_select">#4db5f9</color>
+    <color name="main_bottom_tab_unselect">#A8A8A8</color>
+
+    <color name="dDVTransparentGray">#99000000</color>
+    <color name="dDVColorPrimary">@color/colorPrimary</color>
+
+    <color name="text_find_title">#373737</color>
+
+</resources>

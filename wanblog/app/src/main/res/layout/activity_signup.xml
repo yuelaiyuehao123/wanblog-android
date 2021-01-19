@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_home"
+        style="@style/AppTheme.Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/buttonBarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/title_height"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_signUp_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:src="@drawable/ic_close" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/TitleTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="注册 wanblog" />
+
+            <TextView
+                android:id="@+id/tv_signUp_test"
+                style="@style/TitleTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="25dp"
+                android:gravity="center"
+                android:text="显示测试账号" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_phone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_signUp_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="用户名"
+            android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions"
+            android:paddingStart="50dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_phone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_signUp_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="昵称"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingStart="50dp" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_password" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_signUp_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:paddingStart="50dp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_password" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_signUp_password2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="确认密码"
+            android:inputType="textPassword"
+            android:paddingStart="50dp" />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/colorPrimary"
+        android:text="注册"
+        android:textColor="@color/global_bg_white"
+        android:textSize="23sp" />
+
+</LinearLayout>
