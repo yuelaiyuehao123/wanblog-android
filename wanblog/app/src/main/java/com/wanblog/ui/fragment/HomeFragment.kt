@@ -1,12 +1,15 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.vlayout.DelegateAdapter
 import com.alibaba.android.vlayout.VirtualLayoutManager
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
@@ -48,57 +51,6 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         }
     }
 
-    override fun initData() {
-        refreshLayout_home_page.autoRefresh()
-    }
-
-    override fun initInject() {
-        fragmentComponent.inject(this)
-    }
-
-    override fun initPresenter() {
-        mPresenter.attachView(this)
-    }
-
-    override fun showProgress() {
-    }
-
-    override fun showError(url: String, msg: String, code: Int) {
-        if (code == ApiCode.NET_ERROR) {
-            status_view_home_page.showNetError()
-        } else {
-            status_view_home_page.showDataError()
-        }
-        refreshLayout_home_page.finishRefresh()
-        refreshLayout_home_page.finishLoadMore()
-    }
-
-    override fun onBlogListResult(isRefresh: Boolean, blogList: MutableList<BlogBean>) {
-
-        refreshLayout_home_page.finishRefresh()
-        refreshLayout_home_page.finishLoadMore()
-        if (blogList.isEmpty()) {
-            if (isRefresh) {
-                status_view_home_page.showDataEmpty()
-            } else {
-                Toast.makeText(mContext, "没有更多数据了", Toast.LENGTH_LONG).show()
-            }
-        } else {
-            if (isRefresh) {
-                mBlogList.clear()
-                status_view_home_page.hide()
-            }
-            mBlogList.addAll(blogList)
-            mAdapters.clear()
-            val adapter = initListAdapter(mBlogList)
-            mAdapters.add(adapter)
-            mDelegateAdapter!!.setAdapters(mAdapters)
-            mDelegateAdapter!!.notifyDataSetChanged()
-        }
-
-    }
-
-
     private fun initRecyclerView() {
 
         //初始化
@@ -127,25 +79,76 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
     }
 
+    override fun initData() {
+        refreshLayout_home_page.autoRefresh()
+    }
+
+    override fun initInject() {
+        fragmentComponent.inject(this)
+    }
+
+    override fun initPresenter() {
+        mPresenter.attachView(this)
+    }
+
+    override fun showProgress() {
+    }
+
+    override fun showError(url: String, msg: String, code: Int) {
+        if (code == ApiCode.NET_ERROR) {
+            status_view_home_page.showNetError()
+        } else {
+            status_view_home_page.showDataError()
+        }
+        refreshLayout_home_page.finishRefresh()
+        refreshLayout_home_page.finishLoadMore()
+    }
+
+    override fun onBlogListResult(isRefresh: Boolean, blogList: MutableList<BlogBean>) {
+        if (blogList.isEmpty()) {
+            if (isRefresh) {
+                status_view_home_page.showDataEmpty()
+            } else {
+                Toast.makeText(mContext, "没有更多数据了", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            if (isRefresh) {
+                mBlogList.clear()
+                status_view_home_page.hide()
+            }
+            mBlogList.addAll(blogList)
+            mAdapters.clear()
+            val adapter = initListAdapter(mBlogList)
+            mAdapters.add(adapter)
+            mDelegateAdapter!!.setAdapters(mAdapters)
+            mDelegateAdapter!!.notifyDataSetChanged()
+        }
+        refreshLayout_home_page.finishRefresh()
+        refreshLayout_home_page.finishLoadMore()
+    }
+
     /**
      * 普通列表item
      */
-    private fun initListAdapter(homePageItems: MutableList<BlogBean>): BaseDelegateAdapter {
+    private fun initListAdapter(blogList: MutableList<BlogBean>): BaseDelegateAdapter {
         return object : BaseDelegateAdapter(
             mContext,
             LinearLayoutHelper(),
             R.layout.item_home_list,
-            homePageItems.size,
+            blogList.size,
             VLAYOUT_LIST
         ) {
             override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val homePageBean = homePageItems[position]
-                val tv_home_list_item_title = holder.getView<TextView>(R.id.tv_home_list_item_title)
-                val tv_home_list_item_description =
-                    holder.getView<TextView>(R.id.tv_home_list_item_description)
-                tv_home_list_item_title.text = homePageBean.title
-                tv_home_list_item_description.text = homePageBean.description
+                val blog = blogList[position]
+                val tv_home_list_item_title = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_title)
+                val tv_home_list_item_description = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_description)
+                val iv_home_list_item_avatar = holder.getView<AppCompatImageView>(R.id.iv_home_list_item_avatar)
+                val tv_home_list_item_username = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_username)
+                Glide.with(mContext!!).load(blog.avatar).into(iv_home_list_item_avatar)
+                tv_home_list_item_title.text = blog.title
+                tv_home_list_item_description.text = blog.description
+                tv_home_list_item_username.text = blog.username
             }
         }
     }

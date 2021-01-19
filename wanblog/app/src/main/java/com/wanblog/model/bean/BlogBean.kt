@@ -7,5 +7,7 @@ data class BlogBean(
     val description: String,
     val content: String,
     val created: String,
+    val username: String,
+    val avatar: String,
     val status: Int
 )
