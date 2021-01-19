@@ -9,7 +9,9 @@ import com.alibaba.android.vlayout.DelegateAdapter
 import com.alibaba.android.vlayout.VirtualLayoutManager
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
@@ -145,7 +147,13 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                 val tv_home_list_item_description = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_description)
                 val iv_home_list_item_avatar = holder.getView<AppCompatImageView>(R.id.iv_home_list_item_avatar)
                 val tv_home_list_item_username = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_username)
-                Glide.with(mContext!!).load(blog.avatar).into(iv_home_list_item_avatar)
+
+                Glide.with(mContext!!)
+                    .load(blog.avatar)
+                    .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                    .transition(DrawableTransitionOptions.withCrossFade(500))
+                    .into(iv_home_list_item_avatar)
+
                 tv_home_list_item_title.text = blog.title
                 tv_home_list_item_description.text = blog.description
                 tv_home_list_item_username.text = blog.username
