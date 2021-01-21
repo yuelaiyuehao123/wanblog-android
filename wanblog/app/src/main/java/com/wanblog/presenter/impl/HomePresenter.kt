@@ -23,6 +23,7 @@ class HomePresenter @Inject constructor() : RxPresenter<HomeContract.View>(),
         } else {
             mCurrentPage++;
         }
+
         addSubscribe(
             ApiManager.getBlogList(mCurrentPage, mSize)
                 .compose(RxUtil.rxSchedulerHelper<MyHttpResponse<MutableList<BlogBean>>>())
