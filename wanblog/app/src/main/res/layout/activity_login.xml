@@ -1,52 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_home"
-        style="@style/AppTheme.Toolbar"
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/buttonBarLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/title_height"
-            android:layout_gravity="center">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_login_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="15dp"
-                android:src="@drawable/ic_close" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/TitleTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="登录 wanblog" />
-
-            <TextView
-                android:id="@+id/tv_signUp"
-                style="@style/TitleTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="25dp"
-                android:gravity="center"
-                android:text="注册" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="@dimen/title_height"
+        app:backButton="true"
+        app:lineColor="@color/global_line_color"
+        app:rightSize="23sp"
+        app:rightTitle="注册"
+        app:title="登录 wanblog"
+        app:titleSize="@dimen/title_size" />
 
     <FrameLayout
         android:layout_width="match_parent"

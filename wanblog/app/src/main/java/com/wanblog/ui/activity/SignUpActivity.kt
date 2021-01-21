@@ -1,7 +1,9 @@
 package com.wanblog.ui.activity
 
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
+import com.hjq.bar.OnTitleBarListener
 import com.wanblog.R
 import com.wanblog.base.BaseActivity
 import com.wanblog.model.bean.SignUpBean
@@ -25,9 +27,21 @@ class SignUpActivity : BaseActivity<SignUpPresenter>(), SignUpContract.View {
     override fun getLayout(): Int = R.layout.activity_signup
 
     override fun initView() {
-        iv_signUp_close.setOnClickListener {
-            finish()
-        }
+
+        title_bar_signUp.setOnTitleBarListener(object : OnTitleBarListener {
+
+            override fun onLeftClick(v: View?) {
+                finish()
+            }
+
+            override fun onTitleClick(v: View?) {
+            }
+
+            override fun onRightClick(v: View?) {
+            }
+
+        })
+
         bt_signUp.setOnClickListener {
             mUserName = et_signUp_name.text.toString()
             val password = et_signUp_password.text.toString()

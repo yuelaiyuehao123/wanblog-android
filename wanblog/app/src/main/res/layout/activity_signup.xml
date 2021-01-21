@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_home"
-        style="@style/AppTheme.Toolbar"
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar_signUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/title_height"
+        app:backButton="true"
+        app:lineColor="@color/global_line_color"
+        app:title="注册 wanblog"
+        app:titleSize="@dimen/title_size" />
 
-        <RelativeLayout
-            android:id="@+id/buttonBarLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/title_height"
-            android:layout_gravity="center">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_signUp_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:padding="15dp"
-                android:src="@drawable/ic_close" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/TitleTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:text="注册 wanblog" />
-
-        </RelativeLayout>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"

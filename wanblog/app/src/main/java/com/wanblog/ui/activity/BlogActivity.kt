@@ -9,26 +9,14 @@ import kotlinx.android.synthetic.main.activity_blog.*
 
 class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
 
+    override fun getLayout(): Int = R.layout.activity_blog
+
     override fun initInject() {
         activityComponent.inject(this)
     }
 
     override fun initPresenter() {
         mPresenter.attachView(this)
-    }
-
-    override fun getLayout(): Int = R.layout.activity_blog
-
-    override fun onBlogResult(data: BlogBean) {
-    }
-
-    override fun onEditBlogResult() {
-    }
-
-    override fun showProgress() {
-    }
-
-    override fun showError(url: String, msg: String, code: Int) {
     }
 
     override fun initView() {
@@ -40,5 +28,16 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
     override fun initData() {
     }
 
+    override fun showProgress() {
+    }
+
+    override fun showError(url: String, msg: String, code: Int) {
+    }
+
+    override fun onBlogResult(data: BlogBean) {
+    }
+
+    override fun onEditBlogResult() {
+    }
 
 }
