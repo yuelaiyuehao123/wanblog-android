@@ -106,4 +106,8 @@ object ApiManager {
     fun getBlogList(currentPage: Int, size: Int): Flowable<MyHttpResponse<MutableList<BlogBean>>> =
         mApiService.getBlogList(currentPage, size)
 
+    fun getBlogDetail(id: Int): Flowable<MyHttpResponse<BlogBean>> =
+        mApiService.getBlogDetail(id)
+
+
 }

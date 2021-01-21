@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.wanblog.R
 import com.wanblog.base.SimpleFragment
+import com.wanblog.ui.activity.LoginActivity
 import com.wanblog.util.UserUtil
 import kotlinx.android.synthetic.main.dialog_logout.view.*
 import kotlinx.android.synthetic.main.fragment_me.*
@@ -30,7 +31,7 @@ class MeFragment : SimpleFragment() {
             if (isLogin) {
                 showLogoutDialog()
             } else {
-//                startActivity<SignInActivity>()
+                startActivity<LoginActivity>()
             }
         }
 

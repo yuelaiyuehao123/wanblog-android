@@ -28,8 +28,9 @@
             android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask" />
 
-<!--        <activity android:name=".ui.activity.LoginActivity" />-->
-<!--        <activity android:name=".ui.activity.SignUpActivity" />-->
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.SignUpActivity" />
+        <activity android:name=".ui.activity.BlogActivity" />
 
     </application>
 

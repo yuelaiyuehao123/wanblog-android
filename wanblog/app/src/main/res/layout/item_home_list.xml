@@ -10,6 +10,7 @@
     app:contentPadding="15dp">
 
     <LinearLayout
+        android:id="@+id/ll_home_list_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/global_bg_white"

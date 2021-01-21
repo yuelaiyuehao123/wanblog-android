@@ -16,7 +16,6 @@ import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-
 public class CheckGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final TypeAdapter<T> adapter;
     private final Gson mGson;
@@ -34,18 +33,18 @@ public class CheckGsonResponseBodyConverter<T> implements Converter<ResponseBody
             response = value.string();
             MyHttpResponse httpStatus = mGson.fromJson(response, MyHttpResponse.class);
             if (httpStatus.getCode() != ApiCode.SUCCESS) {
-                value.close();
                 throw new ApiException(response);
             }
+            if (httpStatus.getData() == null) {
+                httpStatus.setData(new Object());
+            }
+            response = mGson.toJson(httpStatus);
             MediaType contentType = value.contentType();
             Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
             InputStream inputStream = new ByteArrayInputStream(response.getBytes());
             Reader reader = new InputStreamReader(inputStream, charset);
             JsonReader jsonReader = mGson.newJsonReader(reader);
             return adapter.read(jsonReader);
-        } catch (Exception ignored) {
-            value.close();
-            throw new ApiException(response);
         } finally {
             value.close();
         }

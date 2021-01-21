@@ -33,17 +33,6 @@
                 android:gravity="center"
                 android:text="注册 wanblog" />
 
-            <TextView
-                android:id="@+id/tv_signUp_test"
-                style="@style/TitleTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="25dp"
-                android:gravity="center"
-                android:text="显示测试账号" />
-
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -72,32 +61,6 @@
             android:paddingStart="50dp" />
 
     </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_phone" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_signUp_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="昵称"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:paddingStart="50dp" />
-
-    </FrameLayout>
-
 
     <FrameLayout
         android:layout_width="match_parent"

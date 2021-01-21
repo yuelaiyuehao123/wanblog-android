@@ -17,7 +17,7 @@
             android:layout_gravity="center">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_signIn_close"
+                android:id="@+id/iv_login_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -63,7 +63,7 @@
             android:background="@drawable/ic_phone" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_signIn_name"
+            android:id="@+id/et_login_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="用户名"
@@ -88,7 +88,7 @@
             android:background="@drawable/ic_password" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_signIn_password"
+            android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="密码"
@@ -98,7 +98,7 @@
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_signIn"
+        android:id="@+id/bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"

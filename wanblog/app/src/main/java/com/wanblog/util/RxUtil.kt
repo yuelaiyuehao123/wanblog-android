@@ -45,11 +45,7 @@ object RxUtil {
     fun <T> createData(t: T): Flowable<T> {
         return Flowable.create({ emitter ->
             try {
-                if (t != null) {
-                    emitter.onNext(t)
-                } else {
-                    Toast.makeText(App.instance, "服务器数据错误", Toast.LENGTH_SHORT).show()
-                }
+                emitter.onNext(t)
                 emitter.onComplete()
             } catch (e: Exception) {
                 emitter.onError(e)

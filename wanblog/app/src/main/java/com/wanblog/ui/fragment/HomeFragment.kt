@@ -1,6 +1,7 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -19,8 +20,10 @@ import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.http.ApiCode
 import com.wanblog.presenter.contract.HomeContract
 import com.wanblog.presenter.impl.HomePresenter
+import com.wanblog.ui.activity.BlogActivity
 import com.wanblog.ui.adapter.BaseDelegateAdapter
 import kotlinx.android.synthetic.main.fragment_home_page.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
@@ -143,6 +146,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
             override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
                 val blog = blogList[position]
+                val ll_home_list_item = holder.getView<LinearLayout>(R.id.ll_home_list_item)
                 val tv_home_list_item_title = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_title)
                 val tv_home_list_item_description = holder.getView<AppCompatTextView>(R.id.tv_home_list_item_description)
                 val iv_home_list_item_avatar = holder.getView<AppCompatImageView>(R.id.iv_home_list_item_avatar)
@@ -157,6 +161,10 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                 tv_home_list_item_title.text = blog.title
                 tv_home_list_item_description.text = blog.description
                 tv_home_list_item_username.text = blog.username
+
+                ll_home_list_item.setOnClickListener {
+                    startActivity<BlogActivity>()
+                }
             }
         }
     }

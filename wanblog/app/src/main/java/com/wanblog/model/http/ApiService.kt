@@ -5,10 +5,7 @@ import com.wanblog.model.bean.LoginResultBean
 import com.wanblog.model.bean.MyHttpResponse
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -22,5 +19,7 @@ interface ApiService {
     fun getBlogList(@Query("currentPage") currentPage: Int, @Query("size") size: Int):
             Flowable<MyHttpResponse<MutableList<BlogBean>>>
 
+    @GET(ApiSettings.blog)
+    fun getBlogDetail(@Path("id") id: Int): Flowable<MyHttpResponse<BlogBean>>
 
 }
