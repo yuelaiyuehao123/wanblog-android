@@ -20,6 +20,6 @@ interface ApiService {
             Flowable<MyHttpResponse<MutableList<BlogBean>>>
 
     @GET(ApiSettings.blog)
-    fun getBlogDetail(@Path("id") id: Int): Flowable<MyHttpResponse<BlogBean>>
+    fun getBlogDetail(@Path("id") id: Long): Flowable<MyHttpResponse<BlogBean>>
 
 }

@@ -14,7 +14,7 @@ interface BlogContract {
     }
 
     interface Presenter<in T> : BaseContract.BasePresenter<T> {
-        fun blogDetail(blogId: Int)
+        fun blogDetail(blogId: Long)
         fun editBlog(blog: BlogBean)
     }
 

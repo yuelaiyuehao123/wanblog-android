@@ -163,7 +163,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                 tv_home_list_item_username.text = blog.username
 
                 ll_home_list_item.setOnClickListener {
-                    startActivity<BlogActivity>()
+                    startActivity<BlogActivity>(BlogActivity.blog_id_key to blog.id)
                 }
             }
         }

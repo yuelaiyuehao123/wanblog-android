@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bt_blog"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="得到详情"
-        android:textColor="@color/global_bg_white"
-        android:textSize="23sp" />
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar_blog"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:backButton="true"
+        app:lineColor="@color/global_line_color"
+        app:rightSize="23sp"
+        app:titleSize="@dimen/title_size" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tv_blog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:textSize="32sp" />
+
+</LinearLayout>

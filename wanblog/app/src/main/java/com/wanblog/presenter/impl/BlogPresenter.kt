@@ -13,7 +13,7 @@ import javax.inject.Inject
 class BlogPresenter @Inject constructor() : RxPresenter<BlogContract.View>(),
     BlogContract.Presenter<BlogContract.View> {
 
-    override fun blogDetail(blogId: Int) {
+    override fun blogDetail(blogId: Long) {
         addSubscribe(
             ApiManager.getBlogDetail(blogId)
                 .compose(RxUtil.rxSchedulerHelper<MyHttpResponse<BlogBean>>())
