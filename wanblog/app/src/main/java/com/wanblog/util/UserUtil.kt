@@ -9,6 +9,7 @@ object UserUtil {
 
     private val TOKEN: String = "token"
     private val USER_NAME: String = "user_name"
+    private val USER_ID: String = "user_id"
 
     fun isLogin(context: Context): Boolean {
         val token = getToken(context);
@@ -39,6 +40,19 @@ object UserUtil {
      */
     fun saveUserName(context: Context, name: String) {
         SharedPreferencesUtil.getInstance(context).putString(USER_NAME, name)
+    }
+
+    /**
+     * 得到用户id
+     */
+    fun getUserId(context: Context): Int =
+        SharedPreferencesUtil.getInstance(context).getInt(USER_ID)
+
+    /**
+     * 保存用户id
+     */
+    fun saveUserId(context: Context, id: Int) {
+        SharedPreferencesUtil.getInstance(context).putInt(USER_ID, id)
     }
 
     fun logout(context: Context) {

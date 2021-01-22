@@ -69,7 +69,8 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginContract.View {
     override fun onLoginInResult(data: LoginResultBean) {
         if (!TextUtils.isEmpty(data.token)) {
             UserUtil.saveToken(mActivity, data.token)
-            UserUtil.saveUserName(mActivity, mUserName!!)
+            UserUtil.saveUserId(mActivity, data.id)
+            UserUtil.saveUserName(mActivity, data.username)
             finish()
         }
     }
