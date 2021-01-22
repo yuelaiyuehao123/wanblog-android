@@ -15,11 +15,14 @@ interface ApiService {
     @POST(ApiSettings.login)
     fun login(@Body body: RequestBody): Flowable<MyHttpResponse<LoginResultBean>>
 
+    @GET(ApiSettings.logout)
+    fun logout(@Header(ApiSettings.tokenKey) token: String): Flowable<MyHttpResponse<Any>>
+
     @GET(ApiSettings.blog_list)
-    fun getBlogList(@Query("currentPage") currentPage: Int, @Query("size") size: Int):
+    fun getBlogList(@Header(ApiSettings.tokenKey) token: String, @Query("currentPage") currentPage: Int, @Query("size") size: Int):
             Flowable<MyHttpResponse<MutableList<BlogBean>>>
 
     @GET(ApiSettings.blog)
-    fun getBlogDetail(@Path("id") id: Long): Flowable<MyHttpResponse<BlogBean>>
+    fun getBlogDetail(@Header(ApiSettings.tokenKey) token: String, @Path("id") id: Long): Flowable<MyHttpResponse<BlogBean>>
 
 }

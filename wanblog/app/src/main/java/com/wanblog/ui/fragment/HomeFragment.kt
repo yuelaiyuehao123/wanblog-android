@@ -1,14 +1,11 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
+import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import com.alibaba.android.vlayout.DelegateAdapter
 import com.alibaba.android.vlayout.VirtualLayoutManager
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
@@ -24,15 +21,12 @@ import com.wanblog.model.http.ApiCode
 import com.wanblog.presenter.contract.HomeContract
 import com.wanblog.presenter.impl.HomePresenter
 import com.wanblog.ui.activity.BlogActivity
-import com.wanblog.ui.activity.MainActivity
 import com.wanblog.ui.adapter.BaseDelegateAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home_page.*
 import kotlinx.android.synthetic.main.fragment_home_page.refreshLayout_home_page
 import kotlinx.android.synthetic.main.fragment_home_page.rv_home_page
 import kotlinx.android.synthetic.main.fragment_home_page.status_view_home_page
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.uiThread
 

@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.wanblog.R
-import com.wanblog.base.SimpleFragment
+import com.wanblog.base.BaseFragment
+import com.wanblog.presenter.contract.MeContract
+import com.wanblog.presenter.impl.MePresenter
 import com.wanblog.ui.activity.LoginActivity
 import com.wanblog.util.UserUtil
 import kotlinx.android.synthetic.main.dialog_logout.view.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.support.v4.startActivity
 
-class MeFragment : SimpleFragment() {
+class MeFragment : BaseFragment<MePresenter>(), MeContract.View {
 
     companion object {
         fun newInstance(): MeFragment {
@@ -21,6 +23,20 @@ class MeFragment : SimpleFragment() {
             fragment.arguments = bundle
             return fragment
         }
+    }
+
+    override fun initInject() {
+        fragmentComponent.inject(this)
+    }
+
+    override fun initPresenter() {
+        mPresenter.attachView(this)
+    }
+
+    override fun showProgress() {
+    }
+
+    override fun showError(url: String, msg: String, code: Int) {
     }
 
     override fun getLayout(): Int = R.layout.fragment_me
@@ -67,10 +83,14 @@ class MeFragment : SimpleFragment() {
             dialog.dismiss()
         }
         view.dialog_logout_confirm.setOnClickListener {
-            UserUtil.logout(mContext!!)
-            checkIsLogin()
+            mPresenter.logout()
             dialog.dismiss()
         }
+    }
+
+    override fun onLogoutResult() {
+        UserUtil.logout(mContext!!)
+        checkIsLogin()
     }
 
     /**
@@ -85,5 +105,6 @@ class MeFragment : SimpleFragment() {
             tv_me_user_name.text = "登录/注册"
         }
     }
+
 
 }
