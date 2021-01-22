@@ -20,4 +20,14 @@ object ApiSettings {
     //博客详情
     const val blog = "api/blog/{id}"
 
+    //编辑博客
+    const val blog_edit = "api/blog/edit"
+
+    //发布博客
+    const val blog_publish = "api/blog/publish"
+
+    //删除博客
+    const val blog_delete = "api/blog/delete"
+
+
 }

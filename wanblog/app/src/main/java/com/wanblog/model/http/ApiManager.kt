@@ -66,4 +66,13 @@ object ApiManager {
     fun getBlogDetail(id: Long): Flowable<MyHttpResponse<BlogBean>> =
         mApiService.getBlogDetail(UserUtil.getToken(App.instance), id)
 
+    fun blogEdit(body: RequestBody): Flowable<MyHttpResponse<Any>> =
+        mApiService.blogEdit(UserUtil.getToken(App.instance), body)
+
+    fun blogPublish(body: RequestBody): Flowable<MyHttpResponse<Any>> =
+        mApiService.blogPublish(UserUtil.getToken(App.instance), body)
+
+    fun blogDelete(body: RequestBody): Flowable<MyHttpResponse<Any>> =
+        mApiService.blogDelete(UserUtil.getToken(App.instance), body)
+
 }

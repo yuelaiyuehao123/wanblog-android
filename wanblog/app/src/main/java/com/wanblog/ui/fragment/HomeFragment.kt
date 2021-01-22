@@ -1,6 +1,7 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
@@ -56,6 +57,13 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
     override fun initView() {
         initRecyclerView()
+
+        fab_home.setOnClickListener {
+            startActivity<BlogActivity>(
+                BlogActivity.blog_is_new_key to true
+            )
+        }
+
         status_view_home_page.setOnClickListener {
             initData()
         }
@@ -176,8 +184,14 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                 tv_home_list_item_description.text = blog.description
                 tv_home_list_item_username.text = blog.username
 
+                Log.d("abc","set--blog.userId-->"+blog.user_id)
+
                 ll_home_list_item.setOnClickListener {
-                    startActivity<BlogActivity>(BlogActivity.blog_id_key to blog.id)
+                    startActivity<BlogActivity>(
+                        BlogActivity.blog_is_new_key to false,
+                        BlogActivity.blog_id_key to blog.blog_id,
+                        BlogActivity.blog_user_id_key to blog.user_id
+                    )
                 }
             }
         }

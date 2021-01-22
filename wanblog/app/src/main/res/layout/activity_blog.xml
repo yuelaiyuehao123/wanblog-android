@@ -9,16 +9,50 @@
         android:id="@+id/title_bar_blog"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:backButton="true"
-        app:lineColor="@color/global_line_color"
-        app:rightSize="23sp"
-        app:titleSize="@dimen/title_size" />
+        app:backButton="false"
+        app:lineColor="@color/global_line_color">
 
-    <TextView
-        android:id="@+id/tv_blog"
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ib_blog_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@color/global_bg_white"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:src="@drawable/ic_back" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_blog_title"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/global_bg_white"
+            android:gravity="center"
+            android:textColor="@color/selector_edit_blog"
+            android:textSize="@dimen/title_size" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ib_blog_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:background="@color/global_bg_white"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:src="@drawable/ic_publish" />
+
+    </com.hjq.bar.TitleBar>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_blog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/global_bg_gray"
+        android:enabled="false"
+        android:gravity="top"
         android:padding="15dp"
+        android:textColor="@color/selector_edit_blog"
         android:textSize="32sp" />
 
 </LinearLayout>

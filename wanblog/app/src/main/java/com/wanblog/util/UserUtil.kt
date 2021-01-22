@@ -45,14 +45,14 @@ object UserUtil {
     /**
      * 得到用户id
      */
-    fun getUserId(context: Context): Int =
-        SharedPreferencesUtil.getInstance(context).getInt(USER_ID)
+    fun getUserId(context: Context): Long =
+        SharedPreferencesUtil.getInstance(context).getLong(USER_ID)
 
     /**
      * 保存用户id
      */
-    fun saveUserId(context: Context, id: Int) {
-        SharedPreferencesUtil.getInstance(context).putInt(USER_ID, id)
+    fun saveUserId(context: Context, id: Long) {
+        SharedPreferencesUtil.getInstance(context).putLong(USER_ID, id)
     }
 
     fun logout(context: Context) {
