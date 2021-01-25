@@ -1,7 +1,6 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
@@ -15,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.jakewharton.rxbinding4.view.clicks
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
 import com.wanblog.model.bean.BlogBean
@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_home_page.status_view_home_page
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.uiThread
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
@@ -184,15 +185,16 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                 tv_home_list_item_description.text = blog.description
                 tv_home_list_item_username.text = blog.username
 
-                Log.d("abc","set--blog.userId-->"+blog.user_id)
-
-                ll_home_list_item.setOnClickListener {
-                    startActivity<BlogActivity>(
-                        BlogActivity.blog_is_new_key to false,
-                        BlogActivity.blog_id_key to blog.blog_id,
-                        BlogActivity.blog_user_id_key to blog.user_id
-                    )
-                }
+                //1秒钟之内禁用重复点击
+                ll_home_list_item.clicks()
+                    .throttleFirst(1, TimeUnit.SECONDS)
+                    .subscribe {
+                        startActivity<BlogActivity>(
+                            BlogActivity.blog_is_new_key to false,
+                            BlogActivity.blog_id_key to blog.blog_id,
+                            BlogActivity.blog_user_id_key to blog.user_id
+                        )
+                    }
             }
         }
     }
