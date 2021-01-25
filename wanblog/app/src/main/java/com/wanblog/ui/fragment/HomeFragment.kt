@@ -194,6 +194,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
                 Glide.with(mContext!!)
                     .load(blog.avatar)
+                    .placeholder(R.drawable.ic_user_avatar_placeholder)
                     .apply(RequestOptions.bitmapTransform(CircleCrop()))
                     .transition(DrawableTransitionOptions.withCrossFade(500))
                     .into(iv_home_list_item_avatar)
