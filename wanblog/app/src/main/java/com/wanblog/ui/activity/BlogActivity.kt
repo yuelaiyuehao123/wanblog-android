@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.hjq.bar.OnTitleBarListener
 import com.wanblog.R
 import com.wanblog.base.App
 import com.wanblog.base.BaseActivity
 import com.wanblog.model.bean.BlogBean
+import com.wanblog.model.bean.DeleteBlogBean
 import com.wanblog.model.bean.EditBlogBean
 import com.wanblog.model.bean.PublishBlogBean
 import com.wanblog.presenter.contract.BlogContract
@@ -44,12 +44,6 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
         mIsNewBlog = intent.getBooleanExtra(blog_is_new_key, false)
         mBlogId = intent.getLongExtra(blog_id_key, 0)
         mBlogUserId = intent.getLongExtra(blog_user_id_key, 0)
-
-        Log.d("abc", "get--mBlogId-->" + mBlogId)
-        Log.d("abc", "get--blog.userId-->" + mBlogUserId)
-        Log.d("abc", "get--mIsNewBlog-->" + mIsNewBlog)
-
-
         super.onCreate(savedInstanceState)
     }
 
@@ -75,19 +69,22 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
             publishBlog()
         }
 
+        ib_blog_delete.setOnClickListener {
+            deleteBlog()
+        }
+
     }
 
     /**
      * 根据intent传进来的值，显示不同的状态
      */
     private fun checkStatus() {
-
         if (mIsNewBlog) {
             // 新建博客
             et_blog_title.hint = "点击此处编辑标题"
             et_blog.isEnabled = true
             ib_blog_publish.visibility = View.VISIBLE
-            ib_blog_publish.setImageDrawable(resources.getDrawable(R.drawable.ic_publish))
+            ib_blog_delete.visibility = View.GONE
         } else {
             val userId = UserUtil.getUserId(mActivity)
             if (mBlogUserId == userId) {
@@ -95,15 +92,15 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
                 et_blog.isEnabled = true
                 et_blog_title.isEnabled = true
                 ib_blog_publish.visibility = View.VISIBLE
-                ib_blog_publish.setImageDrawable(resources.getDrawable(R.drawable.ic_publish))
+                ib_blog_delete.visibility = View.VISIBLE
             } else {
                 // 查看别人发布的博客
                 et_blog.isEnabled = false
                 et_blog_title.isEnabled = false
                 ib_blog_publish.visibility = View.GONE
+                ib_blog_delete.visibility = View.GONE
             }
         }
-
     }
 
     override fun initData() {
@@ -164,6 +161,12 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
             val bean = EditBlogBean(mBlogBean!!.bid, title, description, content)
             mPresenter.blogEdit(bean)
         }
+        App.mIsRefresh = true
+    }
+
+    private fun deleteBlog() {
+        val bean = DeleteBlogBean(mBlogBean!!.bid)
+        mPresenter.blogDelete(bean)
         App.mIsRefresh = true
     }
 
