@@ -6,13 +6,9 @@
 - androidx
 - kotlin
 - anko
-- bottomNavigationView
 - rxjava3
-- dagger2
 - okhttp3
+- rxbinding4
 - retrofit2
+- dagger2
 - eventbus
-- fragmentationx
-- smartRefreshLayout
-- lottie
-- crashreporter
