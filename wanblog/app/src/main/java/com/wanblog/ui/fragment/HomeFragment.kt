@@ -1,6 +1,7 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.jakewharton.rxbinding4.view.clicks
 import com.wanblog.R
+import com.wanblog.base.App
 import com.wanblog.base.BaseFragment
 import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.http.ApiCode
@@ -68,6 +70,21 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         status_view_home_page.setOnClickListener {
             initData()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkIsRefresh()
+    }
+
+    /**
+     * 编辑博客，发布博客，和删除博客，回到主页面需要自动刷新一下列表
+     */
+    private fun checkIsRefresh() {
+        if (App.mIsRefresh) {
+            refreshLayout_home_page.autoRefresh()
+        }
+        App.mIsRefresh = false
     }
 
     private fun initRecyclerView() {

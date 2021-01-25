@@ -21,6 +21,8 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
+
+        var mIsRefresh: Boolean = false
     }
 
     val appComponent: AppComponent by lazy {

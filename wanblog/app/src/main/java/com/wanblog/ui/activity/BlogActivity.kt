@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.hjq.bar.OnTitleBarListener
 import com.wanblog.R
+import com.wanblog.base.App
 import com.wanblog.base.BaseActivity
 import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.bean.EditBlogBean
@@ -163,7 +164,7 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
             val bean = EditBlogBean(mBlogBean!!.bid, title, description, content)
             mPresenter.blogEdit(bean)
         }
-
+        App.mIsRefresh = true
     }
 
 }
