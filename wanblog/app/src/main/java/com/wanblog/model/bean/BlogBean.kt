@@ -1,8 +1,8 @@
 package com.wanblog.model.bean
 
 data class BlogBean(
-    val blog_id: Long,
-    val user_id: Long,
+    val bid: Long,
+    val uid: Long,
     val title: String,
     val description: String,
     val content: String,

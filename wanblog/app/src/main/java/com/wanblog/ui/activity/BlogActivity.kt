@@ -160,7 +160,7 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
             val bean = PublishBlogBean(title, description, content)
             mPresenter.blogPublish(bean)
         } else {
-            val bean = EditBlogBean(mBlogBean!!.blog_id, title, description, content)
+            val bean = EditBlogBean(mBlogBean!!.bid, title, description, content)
             mPresenter.blogEdit(bean)
         }
 

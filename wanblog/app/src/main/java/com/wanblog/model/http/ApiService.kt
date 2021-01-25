@@ -23,7 +23,7 @@ interface ApiService {
             Flowable<MyHttpResponse<MutableList<BlogBean>>>
 
     @GET(ApiSettings.blog)
-    fun getBlogDetail(@Header(ApiSettings.tokenKey) token: String, @Path("id") id: Long): Flowable<MyHttpResponse<BlogBean>>
+    fun getBlogDetail(@Header(ApiSettings.tokenKey) token: String, @Path("bid") id: Long): Flowable<MyHttpResponse<BlogBean>>
 
     @POST(ApiSettings.blog_edit)
     fun blogEdit(@Header(ApiSettings.tokenKey) token: String, @Body body: RequestBody): Flowable<MyHttpResponse<Any>>

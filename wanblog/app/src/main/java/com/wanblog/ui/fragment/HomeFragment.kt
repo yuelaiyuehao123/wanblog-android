@@ -191,8 +191,8 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
                     .subscribe {
                         startActivity<BlogActivity>(
                             BlogActivity.blog_is_new_key to false,
-                            BlogActivity.blog_id_key to blog.blog_id,
-                            BlogActivity.blog_user_id_key to blog.user_id
+                            BlogActivity.blog_id_key to blog.bid,
+                            BlogActivity.blog_user_id_key to blog.uid
                         )
                     }
             }

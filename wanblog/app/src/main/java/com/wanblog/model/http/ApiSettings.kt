@@ -18,7 +18,7 @@ object ApiSettings {
     const val blog_list = "api/blog/list"
 
     //博客详情
-    const val blog = "api/blog/{id}"
+    const val blog = "api/blog/{bid}"
 
     //编辑博客
     const val blog_edit = "api/blog/edit"

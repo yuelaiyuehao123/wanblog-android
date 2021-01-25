@@ -14,9 +14,9 @@ import javax.inject.Inject
 class BlogPresenter @Inject constructor() : RxPresenter<BlogContract.View>(),
     BlogContract.Presenter<BlogContract.View> {
 
-    override fun blogDetail(blogId: Long) {
+    override fun blogDetail(bid: Long) {
         addSubscribe(
-            ApiManager.getBlogDetail(blogId)
+            ApiManager.getBlogDetail(bid)
                 .compose(RxUtil.rxSchedulerHelper<MyHttpResponse<BlogBean>>())
                 .compose(RxUtil.handleResult())
                 .subscribeWith(object :
@@ -35,7 +35,7 @@ class BlogPresenter @Inject constructor() : RxPresenter<BlogContract.View>(),
 
     override fun blogEdit(blog: EditBlogBean) {
         val jsonObject = JSONObject()
-        jsonObject.put("id", blog.id)
+        jsonObject.put("bid", blog.bid)
         jsonObject.put("title", blog.title)
         jsonObject.put("description", blog.description)
         jsonObject.put("content", blog.content)
@@ -83,7 +83,7 @@ class BlogPresenter @Inject constructor() : RxPresenter<BlogContract.View>(),
 
     override fun blogDelete(blog: DeleteBlogBean) {
         val jsonObject = JSONObject()
-        jsonObject.put("id", blog.id)
+        jsonObject.put("bid", blog.bid)
         val body = RequsetUtil.getRequestBody(jsonObject)
         addSubscribe(
             ApiManager.blogDelete(body)
