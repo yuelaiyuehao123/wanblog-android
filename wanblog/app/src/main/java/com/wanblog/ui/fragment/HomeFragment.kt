@@ -24,8 +24,10 @@ import com.wanblog.model.http.ApiCode
 import com.wanblog.presenter.contract.HomeContract
 import com.wanblog.presenter.impl.HomePresenter
 import com.wanblog.ui.activity.BlogActivity
+import com.wanblog.ui.activity.LoginActivity
 import com.wanblog.ui.adapter.HomeBannerAdapter
 import com.wanblog.ui.adapter.BaseDelegateAdapter
+import com.wanblog.util.UserUtil
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
@@ -74,9 +76,13 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         initRecyclerView()
 
         fab_home.setOnClickListener {
-            startActivity<BlogActivity>(
-                BlogActivity.blog_is_new_key to true
-            )
+            if (UserUtil.isLogin(mContext!!)) {
+                startActivity<BlogActivity>(
+                    BlogActivity.blog_is_new_key to true
+                )
+            } else {
+                startActivity<LoginActivity>()
+            }
         }
 
         status_view_home_page.setOnClickListener {
