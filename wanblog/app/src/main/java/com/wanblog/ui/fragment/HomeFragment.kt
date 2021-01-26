@@ -201,7 +201,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         return object : BaseDelegateAdapter(mContext, LinearLayoutHelper(), R.layout.item_home_banner_layout, 1, VLAYOUT_BANNER) {
             override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val adapter = HomeBannerAdapter(top3BeanItems)
+                val adapter = HomeBannerAdapter(top3BeanItems, mContext!!)
                 val banner = holder.getView<Banner<Any, HomeBannerAdapter>>(R.id.banner)
                 banner.let {
                     it.indicator = CircleIndicator(mContext)

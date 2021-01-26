@@ -22,6 +22,8 @@
     <color name="forget_pwd_color">#40A1F7</color>
     <color name="argument_color">#888888</color>
 
+    <color name="blog_top_bg">#cbd8ff</color>
+
     <color name="item_border_color">#666666</color>
     <color name="item_default_color">#22EEEEEE</color>
     <color name="item_pressed_color">#CCCCCC</color>

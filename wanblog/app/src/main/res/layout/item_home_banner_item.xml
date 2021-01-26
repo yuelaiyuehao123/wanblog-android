@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_home_banner_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blog_top_bg">
 
     <ImageView
         android:id="@+id/iv_home_banner_item_ranking"
@@ -11,27 +13,34 @@
         android:layout_margin="10dp" />
 
     <TextView
+        android:id="@+id/tv_home_banner_item_ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="42sp" />
+
+    <TextView
         android:id="@+id/tv_home_banner_item_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="23sp" />
+        android:textColor="@color/global_txt_black2"
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/tv_home_banner_item_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/tv_home_banner_item_count"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginBottom="15dp"
         android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="28sp" />
+        android:textColor="@color/global_txt_black2"
+        android:textSize="25sp" />
 
 </RelativeLayout>
