@@ -3,6 +3,7 @@ package com.wanblog.presenter.impl
 import com.wanblog.base.RxPresenter
 import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.bean.MyHttpResponse
+import com.wanblog.model.bean.Top3Bean
 import com.wanblog.model.http.ApiManager
 import com.wanblog.model.http.ApiSettings
 import com.wanblog.model.http.CommonSubscriber
@@ -40,6 +41,23 @@ class HomePresenter @Inject constructor() : RxPresenter<HomeContract.View>(),
                     }
                 })
         )
+    }
+
+    override fun getTop3List() {
+        ApiManager.getTop3List()
+            .compose(RxUtil.rxSchedulerHelper<MyHttpResponse<MutableList<Top3Bean>>>())
+            .compose(RxUtil.handleResult())
+            .subscribeWith(object :
+                CommonSubscriber<MutableList<Top3Bean>>(
+                    mView,
+                    isShowViewLoading = false,
+                    isShowDialogLoading = false,
+                    url = ApiSettings.blog_top3_list
+                ) {
+                override fun onNext(data: MutableList<Top3Bean>) {
+                    mView?.onTop3ListResult(data)
+                }
+            })
     }
 
 }

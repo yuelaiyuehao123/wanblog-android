@@ -83,6 +83,6 @@ dependencies {
     }
     //recyclerview的Adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    //home tab
-    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
+    //home banner
+    implementation 'com.youth.banner:banner:2.1.0'
 }

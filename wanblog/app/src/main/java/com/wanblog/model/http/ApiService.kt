@@ -3,6 +3,7 @@ package com.wanblog.model.http
 import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.bean.LoginResultBean
 import com.wanblog.model.bean.MyHttpResponse
+import com.wanblog.model.bean.Top3Bean
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -33,5 +34,9 @@ interface ApiService {
 
     @POST(ApiSettings.blog_delete)
     fun blogDelete(@Header(ApiSettings.tokenKey) token: String, @Body body: RequestBody): Flowable<MyHttpResponse<Any>>
+
+    @GET(ApiSettings.blog_top3_list)
+    fun getTop3List(@Header(ApiSettings.tokenKey) token: String):
+            Flowable<MyHttpResponse<MutableList<Top3Bean>>>
 
 }

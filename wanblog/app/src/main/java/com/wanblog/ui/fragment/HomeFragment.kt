@@ -1,7 +1,6 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
@@ -20,11 +19,16 @@ import com.wanblog.R
 import com.wanblog.base.App
 import com.wanblog.base.BaseFragment
 import com.wanblog.model.bean.BlogBean
+import com.wanblog.model.bean.Top3Bean
 import com.wanblog.model.http.ApiCode
 import com.wanblog.presenter.contract.HomeContract
 import com.wanblog.presenter.impl.HomePresenter
 import com.wanblog.ui.activity.BlogActivity
+import com.wanblog.ui.adapter.BannerImageAdapter
 import com.wanblog.ui.adapter.BaseDelegateAdapter
+import com.youth.banner.Banner
+import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_page.refreshLayout_home_page
 import kotlinx.android.synthetic.main.fragment_home_page.rv_home_page
@@ -34,10 +38,13 @@ import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.TimeUnit
 
+
 class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
     //vLayout
-    val VLAYOUT_LIST = 1           //普通列表
+    val VLAYOUT_BANNER = 1         //轮播图
+    val VLAYOUT_GRID = 2           //网格
+    val VLAYOUT_LIST = 3           //普通列表
 
     //总适配器
     var mDelegateAdapter: DelegateAdapter? = null
@@ -45,7 +52,12 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
     // 存放各个模块的适配器
     private var mAdapters: MutableList<DelegateAdapter.Adapter<*>> = mutableListOf()
 
+    // 前三名数据
+    private var mTop3List: MutableList<Top3Bean> = mutableListOf()
+
+    // 普通列表数据
     private var mBlogList: MutableList<BlogBean> = mutableListOf()
+
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -107,6 +119,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         refreshLayout_home_page.setEnableRefresh(true)
         refreshLayout_home_page.setOnRefreshListener {
             mPresenter.getBlogList(true)
+            mPresenter.getTop3List()
         }
 
         refreshLayout_home_page.setOnLoadMoreListener {
@@ -163,13 +176,46 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
             }
             mBlogList.addAll(blogList)
             mAdapters.clear()
-            val adapter = initListAdapter(mBlogList)
-            mAdapters.add(adapter)
+
+            val bannerAdapter = initBannerAdapter(mTop3List)
+            mAdapters.add(bannerAdapter)
+
+            val listAdapter = initListAdapter(mBlogList)
+            mAdapters.add(listAdapter)
+
             mDelegateAdapter!!.setAdapters(mAdapters)
             mDelegateAdapter!!.notifyDataSetChanged()
         }
         refreshLayout_home_page.finishRefresh()
         refreshLayout_home_page.finishLoadMore()
+    }
+
+    override fun onTop3ListResult(top3List: MutableList<Top3Bean>) {
+        mTop3List = top3List;
+    }
+
+    /**
+     * banner
+     */
+    private fun initBannerAdapter(top3BeanItems: MutableList<Top3Bean>): BaseDelegateAdapter {
+        return object : BaseDelegateAdapter(mContext, LinearLayoutHelper(), R.layout.item_home_banner_layout, 1, VLAYOUT_BANNER) {
+            override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+                super.onBindViewHolder(holder, position)
+                val adapter = BannerImageAdapter(top3BeanItems)
+                val banner = holder.getView<Banner<Any, BannerImageAdapter>>(R.id.banner)
+                banner.let {
+                    it.indicator = CircleIndicator(mContext)
+                    it.setBannerRound(0f)
+                    it.setLoopTime(1000 * 30)
+                    it.adapter = adapter
+                    it.setOnBannerListener(object : OnBannerListener<Top3Bean> {
+                        override fun OnBannerClick(top3Bean: Top3Bean, position: Int) {
+                            Toast.makeText(mContext, "点击了" + top3Bean.username, Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
     }
 
     /**

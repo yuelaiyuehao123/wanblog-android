@@ -17,6 +17,9 @@ object ApiSettings {
     //首页博客列表
     const val blog_list = "api/blog/list"
 
+    //发布博客前三名列表
+    const val blog_top3_list = "api/blog/top3List"
+
     //博客详情
     const val blog = "api/blog/{bid}"
 

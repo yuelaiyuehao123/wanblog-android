@@ -6,6 +6,7 @@ import com.wanblog.log.okHttpLog.LogInterceptor
 import com.wanblog.model.bean.BlogBean
 import com.wanblog.model.bean.LoginResultBean
 import com.wanblog.model.bean.MyHttpResponse
+import com.wanblog.model.bean.Top3Bean
 import com.wanblog.util.UserUtil
 import io.reactivex.rxjava3.core.Flowable
 import okhttp3.OkHttpClient
@@ -58,7 +59,8 @@ object ApiManager {
     fun login(body: RequestBody): Flowable<MyHttpResponse<LoginResultBean>> =
         mApiService.login(body)
 
-    fun logout(): Flowable<MyHttpResponse<Any>> = mApiService.logout(UserUtil.getToken(App.instance))
+    fun logout(): Flowable<MyHttpResponse<Any>> =
+        mApiService.logout(UserUtil.getToken(App.instance))
 
     fun getBlogList(currentPage: Int, size: Int): Flowable<MyHttpResponse<MutableList<BlogBean>>> =
         mApiService.getBlogList(UserUtil.getToken(App.instance), currentPage, size)
@@ -74,5 +76,8 @@ object ApiManager {
 
     fun blogDelete(body: RequestBody): Flowable<MyHttpResponse<Any>> =
         mApiService.blogDelete(UserUtil.getToken(App.instance), body)
+
+    fun getTop3List(): Flowable<MyHttpResponse<MutableList<Top3Bean>>> =
+        mApiService.getTop3List(UserUtil.getToken(App.instance))
 
 }
