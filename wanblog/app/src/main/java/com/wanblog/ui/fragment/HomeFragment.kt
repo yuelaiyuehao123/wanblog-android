@@ -24,7 +24,7 @@ import com.wanblog.model.http.ApiCode
 import com.wanblog.presenter.contract.HomeContract
 import com.wanblog.presenter.impl.HomePresenter
 import com.wanblog.ui.activity.BlogActivity
-import com.wanblog.ui.adapter.BannerImageAdapter
+import com.wanblog.ui.adapter.HomeBannerAdapter
 import com.wanblog.ui.adapter.BaseDelegateAdapter
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
@@ -201,8 +201,8 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         return object : BaseDelegateAdapter(mContext, LinearLayoutHelper(), R.layout.item_home_banner_layout, 1, VLAYOUT_BANNER) {
             override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
                 super.onBindViewHolder(holder, position)
-                val adapter = BannerImageAdapter(top3BeanItems)
-                val banner = holder.getView<Banner<Any, BannerImageAdapter>>(R.id.banner)
+                val adapter = HomeBannerAdapter(top3BeanItems)
+                val banner = holder.getView<Banner<Any, HomeBannerAdapter>>(R.id.banner)
                 banner.let {
                     it.indicator = CircleIndicator(mContext)
                     it.setBannerRound(0f)

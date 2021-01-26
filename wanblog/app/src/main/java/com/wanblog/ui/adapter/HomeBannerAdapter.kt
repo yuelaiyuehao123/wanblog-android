@@ -1,6 +1,5 @@
 package com.wanblog.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,8 @@ import com.wanblog.model.bean.Top3Bean
 import com.youth.banner.adapter.BannerAdapter
 import kotlinx.android.synthetic.main.item_home_banner_item.view.*
 
-class BannerImageAdapter(top3BeanList: MutableList<Top3Bean>) :
-    BannerAdapter<Top3Bean, BannerImageAdapter.ViewHolder>(top3BeanList) {
+class HomeBannerAdapter(top3BeanList: MutableList<Top3Bean>) :
+    BannerAdapter<Top3Bean, HomeBannerAdapter.ViewHolder>(top3BeanList) {
 
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_home_banner_item, parent, false)
