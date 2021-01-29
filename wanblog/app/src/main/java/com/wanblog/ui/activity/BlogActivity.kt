@@ -1,7 +1,6 @@
 package com.wanblog.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.wanblog.R
@@ -14,25 +13,40 @@ import com.wanblog.model.bean.PublishBlogBean
 import com.wanblog.presenter.contract.BlogContract
 import com.wanblog.presenter.impl.BlogPresenter
 import com.wanblog.util.UserUtil
+import io.noties.markwon.Markwon
+import io.noties.markwon.editor.MarkwonEditor
+import io.noties.markwon.editor.MarkwonEditorTextWatcher
 import kotlinx.android.synthetic.main.activity_blog.*
 
-/**
- * 博客详情页面，会有三种状态:
- *  1.新创建博客
- *    - 显示发布按钮
- *  2.查看自己发表的博客
- *    - 支持修改
- *    - 显示发布按钮
- *  3.查看别人发表的博客
- *    - 不支持修改
- *    - 隐藏发布按钮
- */
 class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
 
     private var mBlogId: Long = 0
     private var mBlogUserId: Long = 0
     private var mIsNewBlog: Boolean = false
+    private var mBlogStatus: BlogStatus = BlogStatus.READ
     private var mBlogBean: BlogBean? = null
+
+    /**
+     * 当前页面的状态
+     * READ(只读):
+     *      1.查看别人发布的博客
+     *      2.隐藏发布按钮
+     *      3.隐藏删除按钮
+     * EDIT(编辑):
+     *      1.用markdown语法编辑中的状态
+     *      2.显示发布按钮
+     *      3.显示删除按钮
+     * PREVIEW(预览):
+     *      1.显示markdown格式
+     *      2.显示发布按钮
+     *      3.显示删除按钮
+     *
+     * 注意：1.只读状态不能切换到编辑状态或预览状态
+     *      2.编辑状态和预览状态可以互相切换
+     */
+    enum class BlogStatus {
+        READ, PREVIEW, EDIT
+    }
 
     companion object {
         const val blog_is_new_key: String = "blog_is_new_key"
@@ -41,9 +55,7 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        mIsNewBlog = intent.getBooleanExtra(blog_is_new_key, false)
-        mBlogId = intent.getLongExtra(blog_id_key, 0)
-        mBlogUserId = intent.getLongExtra(blog_user_id_key, 0)
+        initStatus()
         super.onCreate(savedInstanceState)
     }
 
@@ -57,49 +69,97 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
         mPresenter.attachView(this)
     }
 
-    override fun initView() {
-
-        checkStatus();
-
-        ib_blog_back.setOnClickListener {
-            finish()
-        }
-
-        ib_blog_publish.setOnClickListener {
-            publishBlog()
-        }
-
-        ib_blog_delete.setOnClickListener {
-            deleteBlog()
-        }
-
-    }
-
     /**
-     * 根据intent传进来的值，显示不同的状态
+     * 初始化当前页面状态
+     * 1.新建立博客进入编辑状态
+     * 2.查看别人博客进入只读状态
+     * 3.查看自己博客进入预览状态
      */
-    private fun checkStatus() {
+    private fun initStatus() {
+        mIsNewBlog = intent.getBooleanExtra(blog_is_new_key, false)
+        mBlogId = intent.getLongExtra(blog_id_key, 0)
+        mBlogUserId = intent.getLongExtra(blog_user_id_key, 0)
         if (mIsNewBlog) {
-            // 新建博客
-            et_blog_title.hint = "点击此处编辑标题"
-            et_blog.isEnabled = true
-            ib_blog_publish.visibility = View.VISIBLE
-            ib_blog_delete.visibility = View.GONE
+            mBlogStatus = BlogStatus.EDIT
         } else {
             val userId = UserUtil.getUserId(mActivity)
             if (mBlogUserId == userId) {
-                // 查看自己发布的博客
-                et_blog.isEnabled = true
-                et_blog_title.isEnabled = true
-                ib_blog_publish.visibility = View.VISIBLE
-                ib_blog_delete.visibility = View.VISIBLE
+                mBlogStatus = BlogStatus.PREVIEW
             } else {
-                // 查看别人发布的博客
-                et_blog.isEnabled = false
-                et_blog_title.isEnabled = false
+                mBlogStatus = BlogStatus.READ
+            }
+        }
+    }
+
+    /**
+     * 根据不同状态展示不同的ui
+     */
+    private fun checkStatus() {
+        when (mBlogStatus) {
+            BlogStatus.READ -> {
                 ib_blog_publish.visibility = View.GONE
                 ib_blog_delete.visibility = View.GONE
+                ib_blog_edit.visibility = View.GONE
+                ib_blog_preview.visibility = View.GONE
+                tv_blog_title.visibility = View.VISIBLE
+                et_blog_title.visibility = View.GONE
+                tv_blog_content.visibility = View.VISIBLE
+                et_blog_content.visibility = View.GONE
+                val markDown = Markwon.create(mActivity)
+                markDown.setMarkdown(tv_blog_content, tv_blog_content.text.toString())
             }
+            BlogStatus.PREVIEW -> {
+                ib_blog_publish.visibility = View.VISIBLE
+                ib_blog_delete.visibility = View.VISIBLE
+                ib_blog_edit.visibility = View.VISIBLE
+                ib_blog_preview.visibility = View.GONE
+
+                tv_blog_title.visibility = View.VISIBLE
+                et_blog_title.visibility = View.GONE
+
+                tv_blog_content.visibility = View.VISIBLE
+                et_blog_content.visibility = View.GONE
+
+                val markDown = Markwon.create(mActivity)
+                markDown.setMarkdown(tv_blog_content, et_blog_content.text.toString())
+            }
+            BlogStatus.EDIT -> {
+                et_blog_title.hint = "点击此处编辑标题"
+                ib_blog_publish.visibility = View.VISIBLE
+                ib_blog_delete.visibility = View.VISIBLE
+                ib_blog_edit.visibility = View.GONE
+                ib_blog_preview.visibility = View.VISIBLE
+                tv_blog_title.visibility = View.GONE
+                et_blog_title.visibility = View.VISIBLE
+                tv_blog_content.visibility = View.GONE
+                et_blog_content.visibility = View.VISIBLE
+
+                val markDown = Markwon.create(mActivity)
+                val editor = MarkwonEditor.create(markDown);
+                et_blog_content.addTextChangedListener(MarkwonEditorTextWatcher.withProcess(editor))
+
+            }
+
+        }
+    }
+
+    override fun initView() {
+        ib_blog_edit.setOnClickListener {
+            mBlogStatus = BlogStatus.EDIT
+            checkStatus()
+        }
+        ib_blog_preview.setOnClickListener {
+            mBlogStatus = BlogStatus.PREVIEW
+            checkStatus()
+        }
+        ib_blog_back.setOnClickListener {
+            finish()
+        }
+        ib_blog_publish.setOnClickListener {
+            publishBlog()
+        }
+        ib_blog_delete.setOnClickListener {
+            deleteBlog()
         }
     }
 
@@ -117,8 +177,11 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
 
     override fun onBlogResult(data: BlogBean) {
         mBlogBean = data
+        tv_blog_title.text = data.title
         et_blog_title.setText(data.title)
-        et_blog.setText(data.content)
+        tv_blog_content.text = data.content
+        et_blog_content.setText(data.content)
+        checkStatus()
     }
 
     override fun onBlogEditResult() {
@@ -138,8 +201,8 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
      */
     private fun publishBlog() {
         val title = et_blog_title.text.toString()
-        val description = et_blog.text.toString()
-        val content = et_blog.text.toString()
+        val description = et_blog_title.text.toString()
+        val content = et_blog_content.text.toString()
 
         if (title.isEmpty()) {
             Toast.makeText(mActivity, "标题不能为空", Toast.LENGTH_SHORT).show()

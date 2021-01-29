@@ -85,4 +85,7 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     //home banner
     implementation 'com.youth.banner:banner:2.1.0'
+    //markdown
+    implementation "io.noties.markwon:core:4.6.1"
+    implementation "io.noties.markwon:editor:4.6.1"
 }

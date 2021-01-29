@@ -124,7 +124,6 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
         refreshLayout_home_page.setEnableLoadMore(true)
         refreshLayout_home_page.setEnableRefresh(true)
         refreshLayout_home_page.setOnRefreshListener {
-            mPresenter.getBlogList(true)
             mPresenter.getTop3List()
         }
 
@@ -198,6 +197,7 @@ class HomeFragment : BaseFragment<HomePresenter>(), HomeContract.View {
 
     override fun onTop3ListResult(top3List: MutableList<Top3Bean>) {
         mTop3List = top3List;
+        mPresenter.getBlogList(true)
     }
 
     /**
