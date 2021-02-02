@@ -13,9 +13,6 @@ import com.wanblog.model.bean.PublishBlogBean
 import com.wanblog.presenter.contract.BlogContract
 import com.wanblog.presenter.impl.BlogPresenter
 import com.wanblog.util.UserUtil
-import io.noties.markwon.Markwon
-import io.noties.markwon.editor.MarkwonEditor
-import io.noties.markwon.editor.MarkwonEditorTextWatcher
 import kotlinx.android.synthetic.main.activity_blog.*
 
 class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
@@ -84,9 +81,9 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
         } else {
             val userId = UserUtil.getUserId(mActivity)
             if (mBlogUserId == userId) {
-                mBlogStatus = BlogStatus.PREVIEW
+                mBlogStatus = BlogStatus.EDIT
             } else {
-                mBlogStatus = BlogStatus.READ
+                mBlogStatus = BlogStatus.PREVIEW
             }
         }
     }
@@ -105,8 +102,6 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
                 et_blog_title.visibility = View.GONE
                 tv_blog_content.visibility = View.VISIBLE
                 et_blog_content.visibility = View.GONE
-                val markDown = Markwon.create(mActivity)
-                markDown.setMarkdown(tv_blog_content, tv_blog_content.text.toString())
             }
             BlogStatus.PREVIEW -> {
                 ib_blog_publish.visibility = View.VISIBLE
@@ -120,8 +115,9 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
                 tv_blog_content.visibility = View.VISIBLE
                 et_blog_content.visibility = View.GONE
 
-                val markDown = Markwon.create(mActivity)
-                markDown.setMarkdown(tv_blog_content, et_blog_content.text.toString())
+                tv_blog_title.text = et_blog_title.text
+                tv_blog_content.text = et_blog_content.text
+
             }
             BlogStatus.EDIT -> {
                 et_blog_title.hint = "点击此处编辑标题"
@@ -133,11 +129,6 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
                 et_blog_title.visibility = View.VISIBLE
                 tv_blog_content.visibility = View.GONE
                 et_blog_content.visibility = View.VISIBLE
-
-                val markDown = Markwon.create(mActivity)
-                val editor = MarkwonEditor.create(markDown);
-                et_blog_content.addTextChangedListener(MarkwonEditorTextWatcher.withProcess(editor))
-
             }
 
         }
@@ -164,7 +155,9 @@ class BlogActivity : BaseActivity<BlogPresenter>(), BlogContract.View {
     }
 
     override fun initData() {
-        if (!mIsNewBlog) {
+        if (mIsNewBlog) {
+            checkStatus()
+        } else {
             mPresenter.blogDetail(mBlogId)
         }
     }
