@@ -14,6 +14,6 @@
 - eventbus
 
 ## 服务端 
-- [传送门](https://github.com/yuelaiyuehao123/wanblog-server)
-- [传送门](https://github.com/yuelaiyuehao123/wanblog-server){target="_blank"}
+[传送门](https://github.com/yuelaiyuehao123/wanblog-server)
+
 
