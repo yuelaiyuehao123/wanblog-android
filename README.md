@@ -1,7 +1,7 @@
-# 玩Blog的客户端
+## 玩Blog的客户端
 - 不积跬步，无以至千里。
 
-# 技术栈
+## 技术栈
 - mvp
 - androidx
 - kotlin
@@ -13,5 +13,5 @@
 - dagger2
 - eventbus
 
-# 服务端 
+## 服务端 
 [传送门](https://github.com/yuelaiyuehao123/wanblog-server)
