@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiManager {
 
-    val SERVER: String = "http://59.110.44.147:9528"
+    val SERVER: String = "http://www.yuelaiyuehao.top:9528"
 
     private val HTTP_LOG_TAG: String = "http"
 
